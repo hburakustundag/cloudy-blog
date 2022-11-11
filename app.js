@@ -32,7 +32,31 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.render("home");
+  db.collection("blogs")
+    .find()
+    .toArray()
+    .then((results) => {
+      res.render("index", { blogs: results });
+    })
+    .catch((err) => console.log(err.message));
+});
+
+app.post("/blogs", (req, res) => {
+  db.collection("blogs")
+    .insertOne({ title: req.body.title, blog: req.body.blogPost })
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => console.error(error))
+    .then(res.redirect("/"));
+});
+
+app.delete("/blogs", (req, res) => {
+  db.collection("blogs")
+    .deleteOne({ title: req.body.title })
+    .then((result) => {
+      res.json("ok");
+    });
 });
 
 app.listen(port, () => console.log(`App is listening on port ${port}`));
