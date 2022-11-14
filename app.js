@@ -43,17 +43,42 @@ app.get("/", (req, res) => {
 
 app.post("/blogs", (req, res) => {
   db.collection("blogs")
-    .insertOne({ title: req.body.title, blog: req.body.blog })
+    .insertOne({ title: req.body.title, blog: req.body.blog, likes: 0 })
     .then((result) => {
-      console.log(result);
+      console.log("Blog created");
+      res.redirect("/");
     })
-    .catch((error) => console.error(error))
-    .then(res.redirect("/"));
+    .catch((error) => console.error(error));
+});
+
+app.put("/addOneLike", (req, res) => {
+  db.collection("blogs")
+    .updateOne(
+      {
+        title: req.body.title,
+        blog: req.body.blog,
+        likes: req.body.likes,
+      },
+      {
+        $inc: {
+          likes: 1,
+        },
+      },
+      {
+        sort: { _id: -1 },
+        upsert: false,
+      }
+    )
+    .then((result) => {
+      console.log("Added One Like");
+      res.json("Like Added");
+    })
+    .catch((error) => console.error(error));
 });
 
 app.delete("/deleteBlog", (req, res) => {
   db.collection("blogs")
-    .deleteOne({ title: req.body.title })
+    .deleteOne({ title: req.body.title, blog: req.body.blog })
     .then((result) => {
       console.log("Blog Deleted");
       res.json("Blog Deleted");
