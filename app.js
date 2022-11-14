@@ -43,7 +43,7 @@ app.get("/", (req, res) => {
 
 app.post("/blogs", (req, res) => {
   db.collection("blogs")
-    .insertOne({ title: req.body.title, blog: req.body.blogPost })
+    .insertOne({ title: req.body.title, blog: req.body.blog })
     .then((result) => {
       console.log(result);
     })
@@ -51,11 +51,12 @@ app.post("/blogs", (req, res) => {
     .then(res.redirect("/"));
 });
 
-app.delete("/blogs", (req, res) => {
+app.delete("/deleteBlog", (req, res) => {
   db.collection("blogs")
     .deleteOne({ title: req.body.title })
     .then((result) => {
-      res.json("ok");
+      console.log("Blog Deleted");
+      res.json("Blog Deleted");
     });
 });
 
