@@ -1,17 +1,25 @@
-const deleteBlog = document.querySelector(".delete-button");
+const deleteButton = document.querySelectorAll(".fa-trash");
 
-deleteBlog.addEventListener("click", (_) => {
-  fetch("/blogs", {
-    method: "delete",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      title: "Hello World!",
-    }),
-  })
-    .then((res) => {
-      if (res.ok) return res.json();
-    })
-    .then((response) => {
-      window.location.reload(true);
-    });
+Array.from(deleteButton).forEach((element) => {
+  element.addEventListener("click", deleteBlog);
 });
+
+async function deleteBlog() {
+  const blogTitle = this.parentNode.childNodes[1].innerText;
+  const blogContent = this.parentNode.childNodes[2].innerText;
+  try {
+    const response = await fetch("deleteBlog", {
+      method: "delete",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: blogTitle,
+        blog: blogContent,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+    location.reload();
+  } catch (error) {
+    console.log(error);
+  }
+}
