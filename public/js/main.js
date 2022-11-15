@@ -10,15 +10,13 @@ Array.from(likeButton).forEach((element) => {
 });
 
 async function deleteBlog() {
-  const blogTitle = this.parentNode.childNodes[1].innerText;
-  const blogContent = this.parentNode.childNodes[3].innerText;
+  const blogId = this.parentNode.dataset.id;
   try {
-    const response = await fetch("deleteBlog", {
+    const response = await fetch("blogs/deleteBlog", {
       method: "delete",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        title: blogTitle,
-        blog: blogContent,
+        blogIdFromJSFile: blogId,
       }),
     });
     const data = await response.json();
@@ -30,17 +28,13 @@ async function deleteBlog() {
 }
 
 async function addLike() {
-  const blogTitle = this.parentNode.childNodes[1].innerText;
-  const blogContent = this.parentNode.childNodes[3].innerText;
-  const likes = Number(this.parentNode.childNodes[7].innerText);
+  const blogId = this.parentNode.dataset.id;
   try {
-    const response = await fetch("addOneLike", {
+    const response = await fetch("blogs/addOneLike", {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        title: blogTitle,
-        blog: blogContent,
-        likes: likes,
+        blogIdFromJSFile: blogId,
       }),
     });
     const data = await response.json();
