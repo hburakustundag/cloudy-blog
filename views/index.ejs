@@ -4,32 +4,6 @@
 
 <p>A place where you can express your deepest feelings and your most crazy adventures.</p>
 
-<div>
-<% for (let i = 0; i < blogs.length; i++) {%>
-<ul class="blog-list">
-    <li class="blog">
-        <p class="blog-title"><%= blogs[i].title %></p>
-        <p class="blog-content"><%= blogs[i].blog %></p>
-        <span>Likes:</span>
-        <span><%= blogs[i].likes %></span>
-        <i class="fa-solid fa-thumbs-up"></i>
-        <i class="fa-solid fa-trash"></i>
-
-    </li>
-    
-</ul>
-<% } %>
-</div>
-<p>Add a blog post:</p>
-<form action="/blogs" method="post" id="blogForm" class="form-control d-flex flex-column mb-5">
-    <label for="title">Title:</label>
-    <input type="text" name="title" id="title" class="mb-2">
-    <label for="blogPost">Blog Post: </label>
-    <textarea name="blog" cols="40" rows="3" form="blogForm" id="blogPost"></textarea>
-    <button type="submit" class="btn add-blog-button">
-        <i class="fa-solid fa-plus plus-button"></i>
-    </button>
-</form>
-
+<p>See and write some <a href="/blogs">blogs.</a></p>
 
 <%- include('partials/footer'); -%>
