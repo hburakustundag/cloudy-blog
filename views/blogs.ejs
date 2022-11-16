@@ -15,7 +15,7 @@
     <% }) %>
     </div>
     <p>Add a blog post:</p>
-    <form action="/blogs/createBlog" method="post" id="blogForm" class="form-control d-flex flex-column mb-5">
+    <form action="/blogs" method="post" id="blogForm" class="form-control d-flex flex-column mb-5">
         <label for="title">Title:</label>
         <input type="text" name="title" id="title" class="mb-2">
         <label for="blogPost">Blog Post: </label>
@@ -24,5 +24,7 @@
             <i class="fa-solid fa-plus plus-button"></i>
         </button>
     </form>
+    <a href="/logout">Logout</a>
+
 
     <%- include('partials/footer'); -%>
