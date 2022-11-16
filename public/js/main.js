@@ -12,7 +12,7 @@ Array.from(likeButton).forEach((element) => {
 async function deleteBlog() {
   const blogId = this.parentNode.dataset.id;
   try {
-    const response = await fetch("blogs/deleteBlog", {
+    const response = await fetch("blogs", {
       method: "delete",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -30,7 +30,7 @@ async function deleteBlog() {
 async function addLike() {
   const blogId = this.parentNode.dataset.id;
   try {
-    const response = await fetch("blogs/addOneLike", {
+    const response = await fetch("blogs", {
       method: "put",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
