@@ -1,7 +1,6 @@
 require("dotenv").config({ path: "./config/.env" });
 const express = require("express");
 const app = express();
-const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
@@ -26,7 +25,9 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.DB_STRING }),
+    store: MongoStore.create({
+      mongoUrl: process.env.DB_STRING,
+    }),
   })
 );
 
