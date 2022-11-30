@@ -1,9 +1,65 @@
-<%- include('partials/header'); -%>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 
-<h1>Welcome to Cloudy Blog!</h1> 
+<head>
+  <meta charset="utf-8">
+  <title>Cloudy Blog</title>
+  <meta charset="utf-8">
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="icon" href="images/favicon.ico?">
 
-<p>A place where you can express your deepest feelings and your most crazy adventures.</p>
+</head>
+  <body>
+    <header>
+      <nav class="navbar navbar-nav">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">CLOUDY BLOG</a>
+          </div>
+            <ul class="nav flex-lg-row">
+              <li id="signup" class="nav-item"><a class="nav-link" href="/signup">SIGN UP</a></li>
+              <li id="login"><a class="nav-link" href="/login">LOGIN</a></li>
+              <li id="about"><a class="nav-link" href="/about">ABOUT US</a></li>
+            </ul>
+        </div>
+      </nav>
+    </header>
+    <div class="body-container">
 
-<p>See and write some <a href="/blogs">blogs.</a></p>
+
+<section class="upper-section">
+    <h1>Welcome to Cloudy Blog!</h1> 
+
+    <p>A place where you can express your deepest feelings and your most crazy adventures.</p>
+
+    <p>You can instantly start sharing your blogs by signing up.</p>
+</section>
+
+<section class="mid-section">
+        <article class="blog-preview">
+            <img src="images/aurora.jpg" alt="two people watching northern lights" class="blog-image">
+            <h6>Author: Jane Doe</h6>
+            <h6><em>Aurora</em></h6>
+            <p>The place where I felt so cold yet it was worth it.</p>
+        </article>
+
+        <article class="blog-preview">
+            <img src="images/nycity.jpeg" alt="Manhattan view" class="blog-image">
+            <h6>Author: Johnny Bravo</h6>
+            <h6><em>My NYC Adventure</em></h6>
+            <p>Concrete jungle where dreams are made of.</p>
+        </article>
+
+        <article class="blog-preview">
+            <img src="images/blueberries.jpeg" alt="blueberries" class="blog-image">
+            <h6>Author: John Doe</h6>
+            <h6><em>Healthy Life Rocks!</em></h6>
+            <p>How my life changed after I started eating healthy?</p>
+        </article>
+</section>
 
 <%- include('partials/footer'); -%>
