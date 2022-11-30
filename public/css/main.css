@@ -31,6 +31,15 @@
   background-color: rgb(10, 12, 68);
 }
 
+.body-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 footer {
   display: flex;
   height: 3em;
