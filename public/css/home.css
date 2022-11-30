@@ -1,0 +1,40 @@
+h1 {
+  font-family: "Rubik Distressed", cursive;
+}
+
+.body-container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.upper-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgb(234, 252, 255);
+  margin-bottom: 20px;
+  padding-right: 4.5%;
+  padding-left: 4.5%;
+  height: 200px;
+}
+
+.mid-section {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.blog-preview {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.blog-image {
+  width: 100%;
+  height: auto;
+}
