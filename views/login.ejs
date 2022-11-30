@@ -41,6 +41,17 @@
 <% } %>
 <section class="login text-center">
     <form class="form-signin" action="/login" method="POST">
+      <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+        <p class="lead fw-normal mb-0 me-3">Sign in with</p>
+        <button type="button" class="btn btn-floating mx-1">
+          <i class="fa-brands fa-google"></i>
+        </button>
+
+        <button type="button" class="btn btn-floating mx-1">
+          <i class="fa-brands fa-facebook"></i>
+        </button>
+      </div>
+      <div>OR</div>
       <img src="images/cloudicon.png" alt="a cloud icon" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
       <label for="inputEmail" class="sr-only">Email address</label>
