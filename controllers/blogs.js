@@ -10,6 +10,15 @@ module.exports = {
     }
   },
 
+  getSampleBlogs: async (req, res) => {
+    try {
+      const sampleBlog = await Blog.find({ _id: req.params.id });
+      res.render("blogs.ejs", { blogs: sampleBlog });
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
   createBlog: async (req, res) => {
     try {
       await Blog.create({
