@@ -9,6 +9,14 @@ const BlogSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    require: true,
+  },
+  cloudinaryId: {
+    type: String,
+    require: true,
+  },
   likes: {
     type: Number,
     required: true,
@@ -16,6 +24,10 @@ const BlogSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: true,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
   },
 });
 
