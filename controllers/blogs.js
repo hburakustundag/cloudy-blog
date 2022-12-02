@@ -1,4 +1,5 @@
 const Blog = require("../models/Blog");
+const cloudinary = require("../middleware/cloudinary");
 
 module.exports = {
   getBlogs: async (req, res) => {
@@ -21,13 +22,18 @@ module.exports = {
 
   createBlog: async (req, res) => {
     try {
+      // Upload image to cloudinary
+      const result = await cloudinary.uploader.upload(req.file.path);
+
       await Blog.create({
         title: req.body.title,
         blog: req.body.blog,
+        image: result.secure_url,
+        cloudinaryId: result.public_id,
         likes: 0,
         userId: req.user.id,
       });
-      console.log("Blog has been created");
+      console.log("Post has been added!");
       res.redirect("/blogs");
     } catch (err) {
       console.log(err);
