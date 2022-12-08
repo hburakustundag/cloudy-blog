@@ -1,4 +1,5 @@
 const LocalStrategy = require("passport-local").Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const mongoose = require("mongoose");
 const User = require("../models/User");
 
@@ -30,6 +31,33 @@ module.exports = function (passport) {
     })
   );
 
+  passport.use(
+    new GoogleStrategy(
+      {
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: `${process.env.DOMAIN}/auth/google/callback`,
+      },
+      async function (accessToken, refreshToken, profile, cb) {
+        let user = await User.findOne({ googleId: profile.id });
+        if (!user) {
+          user = await User.findOne({ username: profile.emails[0].value });
+          if (user) {
+            user.googleId = profile.id;
+          } else {
+            user = new User({
+              username: profile.emails[0].value,
+              email: profile.emails[0].value,
+              googleId: profile.id,
+              hasPassword: false,
+            });
+          }
+        }
+        await user.save();
+        return cb(null, user);
+      }
+    )
+  );
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });
