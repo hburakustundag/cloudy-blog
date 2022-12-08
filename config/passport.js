@@ -1,5 +1,6 @@
 const LocalStrategy = require("passport-local").Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const FacebookStrategy = require("passport-facebook").Strategy;
 const mongoose = require("mongoose");
 const User = require("../models/User");
 
@@ -31,6 +32,7 @@ module.exports = function (passport) {
     })
   );
 
+  //Google oauth
   passport.use(
     new GoogleStrategy(
       {
@@ -58,6 +60,36 @@ module.exports = function (passport) {
       }
     )
   );
+
+  //Facebook oauth
+  passport.use(
+    new FacebookStrategy(
+      {
+        clientID: process.env.FACEBOOK_CLIENT_ID,
+        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL: `${process.env.DOMAIN}/auth/facebook/callback`,
+      },
+      async function (accessToken, refreshToken, profile, cb) {
+        let user = await User.findOne({ facebookId: profile.id });
+        if (!user) {
+          user = await User.findOne({ username: profile.emails[0].value });
+          if (user) {
+            user.facebookId = profile.id;
+          } else {
+            user = new User({
+              username: profile.emails[0].value,
+              email: profile.emails[0].value,
+              facebookId: profile.id,
+              hasPassword: false,
+            });
+          }
+        }
+        await user.save();
+        return cb(null, user);
+      }
+    )
+  );
+
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });
