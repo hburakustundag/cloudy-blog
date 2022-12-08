@@ -7,8 +7,9 @@ const MongoStore = require("connect-mongo");
 const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
-const mainRoutes = require("./routes/main");
-const blogsRoutes = require("./routes/blogs");
+const mainRouter = require("./routes/main");
+const blogsRouter = require("./routes/blogs");
+const authRouter = require("./routes/auth");
 const port = process.env.PORT || 8080;
 
 require("./config/passport")(passport);
@@ -37,7 +38,8 @@ app.use(passport.session());
 
 app.use(flash());
 
-app.use("/", mainRoutes);
-app.use("/blogs", blogsRoutes);
+app.use("/", mainRouter);
+app.use("/blogs", blogsRouter);
+app.use("/auth", authRouter);
 
 app.listen(port, () => console.log(`App is listening on port ${port}`));
