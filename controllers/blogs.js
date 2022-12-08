@@ -10,6 +10,9 @@ module.exports = {
       console.error(error);
     }
   },
+  getNewBlog: async (req, res) => {
+    res.render("newblog.ejs", { user: req.user });
+  },
 
   getSampleBlogs: async (req, res) => {
     try {
