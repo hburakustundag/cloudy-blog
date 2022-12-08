@@ -22,8 +22,12 @@
           </div>
             <ul class="nav flex-lg-row">
               <li id="signup" class="nav-item"><a class="nav-link" href="/signup">SIGN UP</a></li>
-              <li id="login"><a class="nav-link" href="/login">LOGIN</a></li>
-              <li id="about"><a class="nav-link" href="/about">ABOUT US</a></li>
+              <% if (user) { %>
+                <li id="logout"><a class="nav-link" href="/logout">LOGOUT</a></li>
+                <li id="logout"><a class="nav-link" href="/blogs/new" title="Create a new blog">+</a></li>
+              <% } else { %>
+                <li id="login"><a class="nav-link" href="/login">LOGIN</a></li>
+              <% } %>
             </ul>
         </div>
       </nav>
@@ -40,7 +44,7 @@
 </section>
 
 <section class="mid-section">
-        <a href="/blogs/6387a7f1b6e0057f2888766b">
+        <a href="#">
         <article class="blog-preview">
             <img src="images/aurora.jpg" alt="two people watching northern lights" class="blog-image">
             <h6><em>Aurora</em></h6>
