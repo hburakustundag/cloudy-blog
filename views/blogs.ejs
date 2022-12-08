@@ -10,7 +10,7 @@
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/blog.css">
+  <link rel="stylesheet" href="/css/blogs.css">
   <link rel="icon" href="images/favicon.ico?">
 </head>
 
@@ -23,15 +23,20 @@
         </div>
         <ul class="nav flex-lg-row">
           <li id="signup" class="nav-item"><a class="nav-link" href="/signup">SIGN UP</a></li>
-          <li id="login"><a class="nav-link" href="/login">LOGIN</a></li>
-          <li id="about"><a class="nav-link" href="/about">ABOUT US</a></li>
+          <% if (user) { %>
+            <li id="logout"><a class="nav-link" href="/logout">LOGOUT</a></li>
+            <li id="logout"><a class="nav-link" href="/blogs/new" title="Create a new blog">+</a></li>
+          <% } else { %>
+            <li id="login"><a class="nav-link" href="/login">LOGIN</a></li>
+          <% } %>
+          
         </ul>
       </div>
     </nav>
   </header>
   <div class="body-container">
 
-    <div>
+    <div class="blog-flow">
       <% blogs.forEach(element=> { %>
         <ul class="blog-list">
           <li class="blog" data-id="<%= element._id %>">
@@ -54,20 +59,5 @@
         </ul>
         <% }) %>
     </div>
-    <p>Add a blog post:</p>
-    <form action="/blogs" method="post" id="blogForm" class="form-control d-flex flex-column mb-5" enctype="multipart/form-data">
-      <div class="mb-3">
-        <label for="imgUpload" class="form-label">Image</label>
-        <input type="file" class="form-control" id="imageUpload" name="file">
-      </div>
-      <label for="title">Title:</label>
-      <input type="text" name="title" id="title" class="mb-2">
-      <label for="blogPost">Blog Post: </label>
-      <textarea name="blog" cols="40" rows="5" form="blogForm" id="blogPost"></textarea>
-      <button type="submit" class="btn add-blog-button">
-        <i class="fa-solid fa-plus plus-button"></i>
-      </button>
-    </form>
-    <a href="/logout">Logout</a>
 
     <%- include('partials/footer'); -%>
