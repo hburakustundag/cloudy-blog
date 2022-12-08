@@ -2,6 +2,12 @@ h1 {
   font-family: "Rubik Distressed", cursive;
 }
 
+a,
+a:hover {
+  text-decoration: none;
+  color: black;
+}
+
 .body-container {
   position: relative;
   min-height: 100vh;
