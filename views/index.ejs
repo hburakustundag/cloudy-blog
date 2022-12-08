@@ -23,13 +23,14 @@
           <a class="navbar-brand" href="/">CLOUDY BLOG</a>
         </div>
         <ul class="nav flex-lg-row">
-          <li id="signup" class="nav-item"><a class="nav-link" href="/signup">SIGN UP</a></li>
           <% if (user) { %>
-            <li id="logout"><a class="nav-link" href="/logout">LOGOUT</a></li>
             <li id="logout"><a class="nav-link" href="/blogs/new" title="Create a new blog">+</a></li>
-            <% } else { %>
-              <li id="login"><a class="nav-link" href="/login">LOGIN</a></li>
-              <% } %>
+            <li id="logout"><a class="nav-link" href="/blogs">BLOGS</a></li>
+            <li id="logout"><a class="nav-link" href="/logout">LOGOUT</a></li>  
+          <% } else { %>
+            <li id="signup" class="nav-item"><a class="nav-link" href="/signup">SIGN UP</a></li>
+            <li id="login"><a class="nav-link" href="/login">LOGIN</a></li>
+          <% } %>
         </ul>
       </div>
     </nav>
