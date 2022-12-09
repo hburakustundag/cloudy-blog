@@ -1,5 +1,46 @@
-.blog-flow {
+.blog {
   display: flex;
   flex-direction: column;
-  margin: 2%;
+  width: 80%;
+  border: 3px solid;
+  padding: 10px;
+  margin: 1rem auto 1rem auto;
+  background-color: bisque;
+}
+.blog-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.img-blog {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.button-div {
+  display: flex;
+}
+
+#blogPost {
+  white-space: pre-wrap;
+}
+
+.blog-content {
+  white-space: pre-line;
+}
+
+.add-blog-button {
+  background-color: #1abc9c;
+  color: whitesmoke;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+}
+
+.add-blog-button:hover {
+  background-color: rgb(15, 15, 28);
+  color: whitesmoke;
 }
