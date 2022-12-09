@@ -10,6 +10,7 @@
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
   <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/home.css">
   <link rel="stylesheet" href="/css/blogs.css">
   <link rel="icon" href="images/favicon.ico?">
 </head>
@@ -22,11 +23,10 @@
           <a class="navbar-brand" href="/">CLOUDY BLOG</a>
         </div>
         <ul class="nav flex-lg-row">
-          
+          <li id="blogs"><a class="nav-link" href="/blogs">BLOGS</a></li>
           <% if (user) { %>
-            <li id="logout"><a class="nav-link" href="/blogs/new" title="Create a new blog">+</a></li>
-            <li id="logout"><a class="nav-link" href="/blogs">BLOGS</a></li>
             <li id="logout"><a class="nav-link" href="/logout">LOGOUT</a></li>  
+            <li id="logout"><a class="nav-link" href="/blogs/new" title="Create a new blog">+</a></li>
           <% } else { %>
             <li id="signup" class="nav-item"><a class="nav-link" href="/signup">SIGN UP</a></li>
             <li id="login"><a class="nav-link" href="/login">LOGIN</a></li>
@@ -37,29 +37,18 @@
     </nav>
   </header>
   <div class="body-container">
-
-    <div class="blog-flow">
-      <% blogs.forEach(element=> { %>
-        <ul class="blog-list">
-          <li class="blog" data-id="<%= element._id %>">
-            <a href="/blogs/<%= element._id%>">
-              <img class="img-fluid" src="<%= element.image%>">
-            </a>
-            <p class="blog-title">
-              <%= element.title %>
-            </p>
-            <p class="blog-content">
-              <%= element.blog %>
-            </p>
-            <span>Likes:</span>
-            <span>
-              <%= element.likes %>
-            </span>
-            <i class="fa-solid fa-thumbs-up"></i>
-            <i class="fa-solid fa-trash"></i>
-          </li>
-        </ul>
-        <% }) %>
-    </div>
-
+  <section class="mid-section">
+  <div class="blog-container">
+    <% blogs.forEach(element=> { %>
+      <a href="/blogs/<%= element._id%>">
+        <article class="blog-preview">
+          <img src="<%= element.image%>" alt="two people watching northern lights" class="blog-image">
+          <h6><em><%= element.title %></em></h6>
+          <h6><%= element.caption %></h6>
+          <h6>Author: <%= element.user%></h6>
+        </article>
+      </a>
+    <% }) %>
+  </div>
+  </section>
     <%- include('partials/footer'); -%>
