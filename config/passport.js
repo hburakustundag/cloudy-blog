@@ -12,7 +12,7 @@ module.exports = function (passport) {
           return done(err);
         }
         if (!user) {
-          return done(null, false, { msg: `Email ${email} not found.` });
+          return done(null, false, { msg: "Invalid email or password." });
         }
         if (!user.password) {
           return done(null, false, {
@@ -48,7 +48,7 @@ module.exports = function (passport) {
             user.googleId = profile.id;
           } else {
             user = new User({
-              username: profile.emails[0].value,
+              username: profile.displayName,
               email: profile.emails[0].value,
               googleId: profile.id,
               hasPassword: false,
