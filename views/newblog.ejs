@@ -17,7 +17,7 @@
     />
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/blogs.css" />
-    <link rel="icon" href="images/favicon.ico?" />
+    <link rel="icon" href="/images/favicon.ico?" />
   </head>
 
   <body>
@@ -40,7 +40,7 @@
         </div>
       </nav>
     </header>
-    <div class="body-container">
+    <div class="body-container m-5">
       <p>Add a blog post:</p>
       <form
         action="/blogs"
@@ -56,10 +56,15 @@
             class="form-control"
             id="imageUpload"
             name="file"
+            class="form-control"
+            required
+            
           />
         </div>
         <label for="title">Title:</label>
-        <input type="text" name="title" id="title" class="mb-2" />
+        <input type="text" name="title" id="title" class="mb-2 form-control" required/>
+        <label for="caption">Caption:</label>
+        <input type="text" name="caption" id="caption" class="mb-2 form-control" required/>
         <label for="blogPost">Blog Post: </label>
         <textarea
           name="blog"
@@ -67,9 +72,11 @@
           rows="5"
           form="blogForm"
           id="blogPost"
+          class="form-control"
+          required
         ></textarea>
-        <button type="submit" class="btn add-blog-button">
-          <i class="fa-solid fa-plus plus-button"></i>
+        <button type="submit" class="btn add-blog-button mt-1 ">
+          Add
         </button>
       </form>
     </div>
