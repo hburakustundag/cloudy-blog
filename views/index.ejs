@@ -48,32 +48,18 @@
     </section>
 
     <h2 class="featured-blogs">Some of the Featured Blogs:</h2>
-    
+
     <section class="mid-section">
-      <a href="#">
-        <article class="blog-preview">
-          <img src="images/aurora.jpg" alt="two people watching northern lights" class="blog-image">
-          <h6><em>Aurora</em></h6>
-          <p>The place where I felt so cold yet it was worth it.</p>
-          <h6>Author: Jane Doe</h6>
-        </article>
-      </a>
-      <a href="#">
-        <article class="blog-preview">
-          <img src="images/nycity.jpeg" alt="Manhattan view" class="blog-image">
-          <h6><em>My NYC Adventure</em></h6>
-          <p>Concrete jungle where dreams are made of.</p>
-          <h6>Author: Johnny Bravo</h6>
-        </article>
-      </a>
-      <a href="#">
-        <article class="blog-preview">
-          <img src="images/blueberries.jpeg" alt="blueberries" class="blog-image">
-          <h6><em>Healthy Life Rocks!</em></h6>
-          <p>How my life changed after I started eating healthy?</p>
-          <h6>Author: John Doe</h6>
-        </article>
-      </a>
+      <% blogs.forEach(element => { %>
+        <a href="/blogs/<%= element._id%>">
+          <article class="blog-preview">
+            <img src="<%= element.image%>" alt="two people watching northern lights" class="blog-image">
+            <h6><em><%= element.title %></em></h6>
+            <h6><%= element.caption %></h6>
+            <h6>Author: <%= element.user%></h6>
+          </article>
+        </a>
+      <% }) %>
     </section>
 
     <%- include('partials/footer'); -%>
