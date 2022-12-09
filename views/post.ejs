@@ -38,13 +38,18 @@
 
   <div class="blog">
   <img class="img-blog" src="<%= blog.image%>">
-            <h4 class="blog-title">
-              <%= blog.title %>
-            </h4>
+            <section class="title-section">
+              <h4 class="blog-title">
+                <%= blog.title %>
+              </h4>
+              <span class="date"><%= date %></span>
+            </section>
             <h5><%= blog.caption %></h5>
+            
             <p class="blog-content">
               <%= blog.blog %>
             </p>
+            <p class="author">Author: <%= blog.user %></p>
             <span>Likes: <%= blog.likes %></span>
   <div class="button-div">
   <form action="/blogs/<%= blog._id %>?_method=PUT" method="POST" class="col-1">
