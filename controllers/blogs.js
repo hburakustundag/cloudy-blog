@@ -4,7 +4,7 @@ const cloudinary = require("../middleware/cloudinary");
 module.exports = {
   getBlogs: async (req, res) => {
     try {
-      const blogPosts = await Blog.find().sort({ createdAt: "asc" }).lean();
+      const blogPosts = await Blog.find().sort({ date: -1 }).lean();
       res.status(200);
       res.render("blogs.ejs", { blogs: blogPosts, user: req.user });
     } catch (error) {
@@ -18,7 +18,12 @@ module.exports = {
   getOneBlog: async (req, res) => {
     try {
       const blogPost = await Blog.findById(req.params.id);
-      res.render("post.ejs", { blog: blogPost, user: req.user });
+      const date = new Date(blogPost.date).toLocaleString();
+      res.render("post.ejs", {
+        blog: blogPost,
+        user: req.user,
+        date: date,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -63,11 +68,9 @@ module.exports = {
   },
   deletePost: async (req, res) => {
     try {
-      // Find post by id
       const blog = await Blog.findById({ _id: req.params.id });
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(blog.cloudinaryId);
-      // Delete post from db
       await Blog.remove({ _id: req.params.id });
       console.log("Deleted Post");
       res.status(200);
