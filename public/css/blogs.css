@@ -44,3 +44,22 @@
   background-color: rgb(15, 15, 28);
   color: whitesmoke;
 }
+
+.title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.date {
+  font-style: italic;
+  font-size: small;
+}
+.blog-title {
+  font-weight: 800;
+  font-size: xx-large;
+}
+
+.author {
+  font-weight: bold;
+  font-style: italic;
+}
