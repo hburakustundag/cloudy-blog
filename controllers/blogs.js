@@ -4,20 +4,21 @@ const cloudinary = require("../middleware/cloudinary");
 module.exports = {
   getBlogs: async (req, res) => {
     try {
-      const blogPosts = await Blog.find({ userId: req.user.id });
+      const blogPosts = await Blog.find().sort({ createdAt: "asc" }).lean();
+      res.status(200);
       res.render("blogs.ejs", { blogs: blogPosts, user: req.user });
     } catch (error) {
       console.error(error);
     }
   },
   getNewBlog: async (req, res) => {
-    res.render("newblog.ejs", { user: req.user });
+    res.status(200).render("newblog.ejs", { user: req.user });
   },
 
-  getSampleBlogs: async (req, res) => {
+  getOneBlog: async (req, res) => {
     try {
-      const sampleBlog = await Blog.find({ _id: req.params.id });
-      res.render("blogs.ejs", { blogs: sampleBlog });
+      const blogPost = await Blog.findById(req.params.id);
+      res.render("post.ejs", { blog: blogPost, user: req.user });
     } catch (error) {
       console.error(error);
     }
@@ -31,6 +32,8 @@ module.exports = {
       await Blog.create({
         title: req.body.title,
         blog: req.body.blog,
+        caption: req.body.caption,
+        user: req.user.username,
         image: result.secure_url,
         cloudinaryId: result.public_id,
         likes: 0,
@@ -43,28 +46,35 @@ module.exports = {
     }
   },
 
-  addOneLike: async (req, res) => {
+  likePost: async (req, res) => {
     try {
       await Blog.findOneAndUpdate(
-        { _id: req.body.blogIdFromJSFile },
+        { _id: req.params.id },
         {
           $inc: { likes: 1 },
         }
       );
-      console.log("Like Added");
-      res.json("Like Added");
+      console.log("Likes +1");
+      res.status(200);
+      res.redirect(`/blogs/${req.params.id}`);
     } catch (err) {
       console.log(err);
     }
   },
-
-  deleteBlog: async (req, res) => {
+  deletePost: async (req, res) => {
     try {
-      await Blog.findOneAndDelete({ _id: req.body.blogIdFromJSFile });
-      console.log("Blog Deleted");
-      res.json("Blog Deleted");
-    } catch (error) {
-      console.error(error);
+      // Find post by id
+      const blog = await Blog.findById({ _id: req.params.id });
+      // Delete image from cloudinary
+      await cloudinary.uploader.destroy(blog.cloudinaryId);
+      // Delete post from db
+      await Blog.remove({ _id: req.params.id });
+      console.log("Deleted Post");
+      res.status(200);
+      res.redirect("/blogs");
+    } catch (err) {
+      console.log(err);
+      res.redirect("/");
     }
   },
 };
