@@ -9,6 +9,13 @@ const BlogSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  user: {
+    type: String,
+  },
+  caption: {
+    type: String,
+    require: true,
+  },
   image: {
     type: String,
     require: true,
