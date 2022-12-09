@@ -1,5 +1,8 @@
+const Blog = require("../models/Blog");
+
 module.exports = {
   getIndex: async (req, res) => {
-    res.render("index", { user: req.user });
+    const blog = await Blog.find({ user: "Johnny Bravo" });
+    res.render("index", { user: req.user, blogs: blog });
   },
 };
