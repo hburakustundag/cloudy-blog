@@ -43,7 +43,7 @@ module.exports = function (passport) {
       async function (accessToken, refreshToken, profile, cb) {
         let user = await User.findOne({ googleId: profile.id });
         if (!user) {
-          user = await User.findOne({ username: profile.emails[0].value });
+          user = await User.findOne({ email: profile.emails[0].value });
           if (user) {
             user.googleId = profile.id;
           } else {
@@ -68,19 +68,20 @@ module.exports = function (passport) {
         clientID: process.env.FACEBOOK_CLIENT_ID,
         clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
         callbackURL: `${process.env.DOMAIN}/auth/facebook/callback`,
+        profileFields: ["id", "displayName", "email"],
       },
       async function (accessToken, refreshToken, profile, cb) {
         let user = await User.findOne({ facebookId: profile.id });
         if (!user) {
-          user = await User.findOne({ username: profile.emails[0].value });
+          user = await User.findOne({ email: profile.emails[0].value });
           if (user) {
             user.facebookId = profile.id;
           } else {
             user = new User({
-              username: profile.emails[0].value,
+              username: profile.displayName,
               email: profile.emails[0].value,
-              facebookId: profile.id,
               hasPassword: false,
+              facebookId: profile.id,
             });
           }
         }
@@ -89,7 +90,6 @@ module.exports = function (passport) {
       }
     )
   );
-
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });
