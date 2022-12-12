@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema({
   password: String,
   hasPassword: { type: Boolean, default: true },
   googleId: String,
+  facebookId: String,
 });
 
 // Password hash middleware.
