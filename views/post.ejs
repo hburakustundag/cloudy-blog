@@ -51,19 +51,48 @@
             </p>
             <p class="author">Author: <%= blog.user %></p>
             <span>Likes: <%= blog.likes %></span>
-  <div class="button-div">
+  <div class="button-div justify-content-between">
   <form action="/blogs/<%= blog._id %>?_method=PUT" method="POST" class="col-1">
-    <button type="submit" class="btn fa-solid fa-thumbs-up"></button>
+    <button type="submit" class="btn btn-dark fa-solid fa-thumbs-up mb-2 jus"></button>
   </form>
   <%if(user && blog.userId === user.id){ %>
     <form
       action="/blogs/<%= blog._id %>?_method=DELETE"
       method="POST"
-      class="col-3"
     >
-      <button class="btn fa fa-trash" type="submit"></button>
+      <button class="btn btn-dark fa fa-trash" type="submit"></button>
     </form>
     <%}%>
   </div>
+  <section class="comments">
+  
+  <% blog.comments.forEach(comment => { %>
+      <article class="comment-box" data-id="<%= comment._id%>">
+        <div class="comment-header">
+        <h6><%= comment.user%>:</h6>
+        <form action="/blogs/<%= blog._id %>/<%= comment._id %>?_method=DELETE" method="POST">
+          <button type="submit" class="btn btn-dark btn-sm fa-solid fa-times mb-2 jus"></button>
+        </form>
+    </div>
+      <div class="comment-body">
+        <p><%= comment.comment %></p>
+        <span><%= new Date(comment.date).toLocaleString()%></span>
+      </div>
+      </article>
+        
+  <% }) %>
+</section>
+<form
+        action="/blogs/<%= blog._id %>/comment"
+        method="post"
+        id="commentForm"
+        class="form-control d-flex flex-column mb-5"
+      >
+        <label for="comment">Leave a comment:</label>
+        <input type="text" name="comment" id="comment" class="mb-2" required/>
+        <button type="submit" class="btn add-blog-button mt-1 ">
+          Add
+        </button>
+      </form>
   </div>
   <%- include('partials/footer'); -%>
