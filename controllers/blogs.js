@@ -21,7 +21,7 @@ module.exports = {
     try {
       const blogPost = await Blog.findById(req.params.id).populate({
         path: "comments",
-        options: { sort: { date: -1 } },
+        options: { sort: { date: 1 } },
       });
       const date = new Date(blogPost.date).toLocaleString();
       res.render("post.ejs", {
