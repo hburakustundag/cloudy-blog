@@ -4,7 +4,8 @@
   "description": "Hello fellow cloudy looking bloggers. This is a website where you can express your deepest feelings. Enjoy!",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
