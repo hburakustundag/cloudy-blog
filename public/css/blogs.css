@@ -63,3 +63,20 @@
   font-weight: bold;
   font-style: italic;
 }
+
+.comment-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-box {
+  background-color: whitesmoke;
+  border-radius: 1em;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+}
