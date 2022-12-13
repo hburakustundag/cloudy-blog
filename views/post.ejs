@@ -55,7 +55,7 @@
   <form action="/blogs/<%= blog._id %>?_method=PUT" method="POST" class="col-1">
     <button type="submit" class="btn btn-dark fa-solid fa-thumbs-up mb-2 jus"></button>
   </form>
-  <%if(user && blog.userId === user.id){ %>
+  <%if (user && blog.userId === user.id) { %>
     <form
       action="/blogs/<%= blog._id %>?_method=DELETE"
       method="POST"
@@ -70,9 +70,11 @@
       <article class="comment-box" data-id="<%= comment._id%>">
         <div class="comment-header">
         <h6><%= comment.user%>:</h6>
+        <%if (user && comment.userId == user.id) { %>
         <form action="/blogs/<%= blog._id %>/<%= comment._id %>?_method=DELETE" method="POST">
           <button type="submit" class="btn btn-dark btn-sm fa-solid fa-times mb-2 jus"></button>
         </form>
+        <%}%>
     </div>
       <div class="comment-body">
         <p><%= comment.comment %></p>
